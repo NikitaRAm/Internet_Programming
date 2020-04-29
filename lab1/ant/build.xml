@@ -1,0 +1,24 @@
+<project name="Lab1" default = "copy" >
+<target name="init">
+ <echo message="Building Lab1 Project" />
+</target>
+<target name="create" depends ="init">
+ <delete dir= "C:\src\apache-tomcat-9.0.30\webapps\Lab1\" />
+ <mkdir dir= "C:\src\apache-tomcat-9.0.30\webapps\Lab1\" />
+ <mkdir dir= "C:\src\apache-tomcat-9.0.30\webapps\Lab1\WEB-INF\" />
+ <mkdir dir= "C:\src\apache-tomcat-9.0.30\webapps\Lab1\images\" />
+</target>
+
+<target name="copy" depends ="create">
+ <copy file= "F:\internet\lab1\WEB-INF\web.xml"
+ todir="C:\src\apache-tomcat-9.0.30\webapps\Lab1\WEB-INF\" />
+ <copy file= "F:\internet\lab1\web\index.html"
+ todir="C:\src\apache-tomcat-9.0.30\webapps\Lab1\" />
+ <copy file= "F:\internet\lab1\web\address.html"
+ todir="C:\src\apache-tomcat-9.0.30\webapps\Lab1\" />
+ <copy file= "F:\internet\lab1\web\education.html"
+ todir="C:\src\apache-tomcat-9.0.30\webapps\Lab1\" />
+ <copy file= "F:\internet\lab1\web\images\img.jpg"
+ todir="C:\src\apache-tomcat-9.0.30\webapps\Lab1\images\" />
+ </target>
+</project>

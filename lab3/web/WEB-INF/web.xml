@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <display-name>Ant 03 simple servlet app</display-name>
+    <description>
+        This is a simple web application with a source code organization
+        based on the recommendations of the Application Developer's Guide.
+    </description>
+
+    <servlet>
+        <servlet-name>Sss</servlet-name>
+        <servlet-class>Sss</servlet-class>
+    </servlet>
+<servlet>
+        <servlet-name>Sssred</servlet-name>
+        <servlet-class>Sssred</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Mmm</servlet-name>
+        <servlet-class>Mmm</servlet-class>
+    </servlet>
+<servlet>
+<servlet-name>Ggg</servlet-name>
+<servlet-class>Ggg</servlet-class>
+</servlet>
+<servlet>
+<servlet-name>Ppp</servlet-name>
+<servlet-class>Ppp</servlet-class>
+</servlet>
+<servlet>
+        <servlet-name>PppD</servlet-name>
+        <servlet-class>PppD</servlet-class>
+    </servlet>
+<servlet-mapping>
+<servlet-name>Sss</servlet-name>
+<url-pattern>/Sss</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>Sssred</servlet-name>
+<url-pattern>/Sssred</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>Mmm</servlet-name>
+<url-pattern>/Mmm</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>Ggg</servlet-name>
+<url-pattern>/GetExample</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>Ppp</servlet-name>
+<url-pattern>/PostExample</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+<servlet-name>PppD</servlet-name>
+<url-pattern>/PppD</url-pattern>
+</servlet-mapping>
+</web-app>     

@@ -1,0 +1,45 @@
+<project name = "lab9" default = "copy">
+
+  <target name = "init">
+    <echo message = "Building Project lab9" />
+    <property name = "server_dir_name" value = "E:\Education\Internet_Programming\Tomcat 9.0\webapps\" />
+    <property name = "workspace" value = "E:\Education\Internet_Programming\Labs\Internet_Programming\lab9\" />
+    <property name = "app_name" value = "lab9" />
+  </target>
+
+  <target name = "compile" depends = "init">
+    <delete verbose = "true">
+      <fileset dir = "${workspace}build" />
+    </delete>
+
+    <javac srcdir = "${workspace}\src"
+           destdir = "${workspace}\web\WEB-INF\classes">
+      <classpath>
+        <fileset file="E:\Education\Internet_Programming\Tomcat 9.0\lib\servlet-api.jar"/>
+        <fileset dir="E:\Education\Internet_Programming\Labs\Internet_Programming\lab9\" />
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="create" depends ="compile">
+    <delete dir = "${server_dir_name}${app_name}\" />
+    <mkdir dir = "${server_dir_name}${app_name}\" />
+    <mkdir dir = "${server_dir_name}${app_name}\WEB-INF" />
+  </target>
+
+  <target name = "copy" depends = "create">
+    <copy file = "${workspace}web\WEB-INF\web.xml"
+          todir = "${server_dir_name}${app_name}\WEB-INF\" />
+
+    <copy todir = "${server_dir_name}${app_name}\WEB-INF\classes">
+      <fileset dir = "${workspace}build" />
+    </copy>
+
+    <copy todir = "${server_dir_name}${app_name}\">
+      <fileset dir = "${workspace}web\" />
+    </copy>
+    <copy todir = "${server_dir_name}${app_name}\WEB-INF\classes">
+      <fileset dir = "${workspace}build" />
+    </copy>
+  </target>
+</project>
