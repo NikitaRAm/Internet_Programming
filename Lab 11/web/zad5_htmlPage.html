@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function Fill_JSON(req){
+            var  xx = eval('('+req+')');
+            var rc = "";
+            for (var i = 0; i < xx.X.length; i++){
+                rc += (xx.X[i].rand +" ");
+            }
+            return (rc);
+        };
+        function OnClick_JSON(n, s){
+            var patern = new RegExp(/^[1-9]+[0-9]*$/);
+            if (patern.test(n)){
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/Lab_11/zad3_servlet",
+                    headers: { 'XRand-N': n},
+                    mimeType: "text/plain",
+                    jsonp: false,
+                //     success: function(data, status){
+                //         alert("Data: " + data);
+                //         s.firstChild.data = Fill_JSON(data);
+                //         s.className ="h1";
+                //     },
+                //     error: function(data, status){
+                //     alert("Data: " + data);
+                //     s.firstChild.data = Fill_JSON(data);
+                //     s.className ="h1";
+                // },
+                    success: function (text) {
+                        s.firstChild.data = Fill_JSON(text);
+                        s.className ="h1";
+                    },
+                    error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        alert(msg);
+                    },
+                });
+            }
+            else
+                alert ("error");
+        };
+
+    </script>
+</head>
+<body>
+
+
+<b> AJAX Example (JSON) </b>
+<form name="FXML" action="#" method="POST">
+    <input name="n" type="text" value="0" size="2" maxlength="2" />
+    <input name="BRand" value="Rand" type="button" size="10" maxlength="10" onclick="OnClick_JSON(this.form.n.value, document.getElementById('xml'))" />&emsp;
+    <span id="xml" class="h2">.....</span>
+</form>
+</body>
+</html>

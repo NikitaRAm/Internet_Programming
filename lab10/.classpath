@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="E:/Education/Internet_Programming/Labs/Internet_Programming/lab10/web/WEB-INF/lib/sqljdbc_8.2.2.0_rus.zip"/>
+	<classpathentry kind="lib" path="E:/Education/Internet_Programming/Labs/Internet_Programming/lab10/web/WEB-INF/lib/sqljdbc_8.2/rus/mssql-jdbc-8.2.2.jre8.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Insert title here</title>
+    <style type="text/css">
+        .h1 {visibility: visible; color: red}
+        .h2 {visibility: hidden }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    var req = crReq();
+    function crReq(){
+        //alert( "crReq");
+        var req = null;
+        if (window.XMLHttpRequest)
+        {
+            req = new XMLHttpRequest();
+            //alert( "req = XMLHttpRequest");
+        }
+        else if (window.ActiveXObject)
+        {
+            try{
+                req = new ActiveXObject("Msxml2.XMLHTTP");
+                //alert( "req = Msxml2.XMLHTTP");
+            }catch(e){
+                try{
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                    //alert( "req = Microsoft.XMLHTTP");
+                }catch(e){
+                    req = null;
+                    //alert( "req = null");
+                }
+            }
+        }
+        return req;
+    }
+
+    function Fill_XML(req){
+        var xmldoc = req.responseXML;
+        var tsnum = xmldoc.getElementsByTagName("num");
+        var rc = "";
+        for (var i = 0; i < tsnum.length; i++){
+            rc += tsnum[i].innerHTML+" "; // тут был косяк в примере
+        }
+        return (rc);
+    };
+    function Fill_JSON(req){
+        var  xx = eval('('+req.responseText+')');
+        var rc = "";
+        for (var i = 0; i < xx.X.length; i++){
+            rc += (xx.X[i].rand +" ");
+        }
+        return (rc);
+    };
+
+    // лечится созданием для каждого своего объекта (закоментирован в каждом из ниже меотдах)
+    function OnClick_Header(x,y,z){
+        //var req = crReq();
+        var patern = new RegExp(/^[0-9]*\.?[0-9]+$/);
+        if (patern.test(x.value) && patern.test(y.value)){
+            if (req){
+                req.open("POST","http://localhost:8080/Lab_11/zad1_servlet", false); // сейчас синзронная работа false стоит
+                req.onreadystatechange = function(){
+                    if (req.readyState == 4){
+                        if (req.status == 200) {
+                            z.value=req.getResponseHeader("value-z");
+                        }
+                        else
+                            alert("status = "+ req.status +"\n"+req.statusText);
+                    }
+                };
+                req.setRequestHeader("value-x",  x.value);
+                req.setRequestHeader("value-y",  y.value);
+                req.send("null");
+            }
+        }
+        else
+            alert ("error");
+    };
+    function OnClick_XML(n, s){
+        //var req = crReq();
+        var patern = new RegExp(/^[1-9]+[0-9]*$/);
+        if (patern.test(n)){
+            if (req){
+                req.open("POST","http://localhost:8080/Lab_11/zad2_servlet", false);
+                req.onreadystatechange = function(){
+                    if (req.readyState == 4){
+                        if (req.status == 200){
+                            s.firstChild.data = Fill_XML(req);
+                            s.className ="h1";
+                        }else alert("status = "+
+                            req.status +"\n"+req.statusText);
+                    }
+                };
+                req.setRequestHeader("XRand-N",  n)
+                req.send("null");
+            }
+        }else alert ("error");
+    };
+    function OnClick_JSON(n, s){
+        //var req = crReq();
+        var patern = new RegExp(/^[1-9]+[0-9]*$/);
+        if (patern.test(n)){
+            if (req){
+                req.open("POST","http://localhost:8080/Lab_11/zad3_servlet", false);
+                req.onreadystatechange = function(){
+                    if (req.readyState == 4){
+                        if (req.status == 200){
+                            s.firstChild.data =
+                                Fill_JSON(req);
+                            s.className ="h1";
+                        }else alert("status = "+
+                            req.status +"\n"+req.statusText);
+                    };
+                };
+                req.setRequestHeader("XRand-N",  n);
+                req.send("null");
+            };
+        }else alert ("error");
+    };
+
+    function OnClick_StartAll (x, y, z, n1, s1, n2, s2) {
+        OnClick_Header(x,y,z);
+        OnClick_XML(n1, s1);
+        OnClick_JSON(n2, s2);
+    }
+</script>
+
+<form name="FXML" action="#" method="POST">
+    <input name="x" type="text" value="0" size="5" maxlength="5" />
+    <input name="y" type="text" value="0" size="5" maxlength="5" />
+    <input name="BAdd" value="Add" type="button" size="10" maxlength="10" onclick="OnClick_Header(this.form.x, this.form.y, this.form.z)"/>
+    <input 	name="z" id="z" type="text" value="0" /><br/><br/>
+
+    <input name="n1" type="text" value="0" size="2" maxlength="2" />
+    <input name="BRand" value="Rand" type="button" size="10" maxlength="10" onclick="OnClick_XML(this.form.n1.value, document.getElementById('xml'))" />&emsp;
+    <span id="xml" class="h2">.....</span><br/><br/>
+
+    <input name="n2" type="text" value="0" size="2" maxlength="2" />
+    <input name="BRand" value="Rand" type="button" size="10" maxlength="10" onclick="OnClick_JSON(this.form.n2.value, document.getElementById('json'))" />&emsp;
+    <span id="json" class="h2">.....</span><br/><br/>
+
+    <input name="BRand" value="StartAll" type="button" size="10" maxlength="10" onclick="OnClick_StartAll(this.form.x, this.form.y, this.form.z, this.form.n1.value, document.getElementById('xml'), this.form.n2.value, document.getElementById('json'))"/>&emsp;
+</form>
+
+</body>
+</html>

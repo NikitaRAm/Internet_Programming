@@ -9,15 +9,15 @@
     try {
         Class.forName(driverName);
         connection = DriverManager.getConnection(
-                "jdbc:sqlserver://localhost:8080;" +
-                        "databaseName=BD;" +
-                        "user=user;" +
+                "jdbc:sqlserver://localhost:61653;" +
+                        "databaseName=java;" +
+                        "user=nikita;" +
                         "password=12345678"
         );
         int count;
 
         CallableStatement callableStatement =
-                connection.prepareCall("{ ? = CALL getId(?) }");
+                connection.prepareCall("{ CALL SelectLogin(?,?) }");
 
         callableStatement.registerOutParameter(1, Types.INTEGER); 
 		callableStatement.setString(2,snameCommand);

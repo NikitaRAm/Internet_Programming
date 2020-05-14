@@ -1,10 +1,10 @@
-<project name = "DrekoAS10" default = "copy">
+<project name = "lab10" default = "copy">
 
     <target name = "init">
-        <echo message = "Building Project DrekoAS10" />
-        <property name = "server_dir_name" value = "C:\Apache\apache-tomcat-9.0.4\webapps\" />
-        <property name = "workspace" value = "D:\Internet\DrekoAS10\" />
-        <property name = "app_name" value = "DrekoAS10" />
+        <echo message = "Building Project lab10" />
+        <property name = "server_dir_name" value = "E:\Education\Internet_Programming\Tomcat 9.0\webapps\" />
+        <property name = "workspace" value = "E:\Education\Internet_Programming\Labs\Internet_Programming\lab10\" />
+        <property name = "app_name" value = "lab10" />
     </target>
 
     <target name = "compile" depends = "init">
@@ -12,8 +12,8 @@
         <javac srcdir = "${workspace}\src"
                destdir = "${workspace}\web\WEB-INF\classes">
             <classpath>
-                <fileset file="C:\Apache\apache-tomcat-9.0.4\lib\servlet-api.jar"/>
-                <fileset dir="D:\Internet\DrekoAS10\web\WEB-INF\lib" />
+                <fileset file="E:\Education\Internet_Programming\Tomcat 9.0\lib\servlet-api.jar"/>
+                <fileset dir="E:\Education\Internet_Programming\Labs\Internet_Programming\lab10\web\WEB-INF\lib" />
             </classpath>
         </javac>
     </target>

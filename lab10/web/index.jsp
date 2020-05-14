@@ -23,13 +23,13 @@
         Connection connection;
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         connection = DriverManager.getConnection(
-                "jdbc:sqlserver://localhost:8080;" +
-                        "databaseName=BD;" +
-                        "user=user;" +
+                "jdbc:sqlserver://localhost:61653;" +
+                        "databaseName=java;" +
+                        "user=nikita;" +
                         "password=12345678"
         );
-        Statement statement = connection.getStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT Id, Name FROM noTable");
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT Id, Name FROM Users");
 
 
         while(resultSet.next())

@@ -17,7 +17,7 @@
 
     String driverName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
-    String sql = "select Id, Name from noTable where Name=?";
+    String sql = "select Id, Name from Users where Name=?";
 
     String snameCommand = request.getParameter("command");
 
@@ -26,9 +26,9 @@
         try{
             Class.forName(driverName);
             con = DriverManager.getConnection(
-                    "jdbc:sqlserver://localhost:8080;" +
-                            "databaseName=BD;" +
-                            "user=user;" +
+                    "jdbc:sqlserver://localhost:61653;" +
+                            "databaseName=java;" +
+                            "user=nikita;" +
                             "password=12345678"
             );
             ps = con.prepareStatement(sql);

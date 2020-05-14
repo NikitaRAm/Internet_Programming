@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        var req = crReq();
+        function OnClick_Header(x,y,z){
+            var patern = new RegExp(/^[0-9]*\.?[0-9]+$/);
+            if (patern.test(x.value) && patern.test(y.value)){
+                if (req){
+                    req.open("POST","http://localhost:8080/Lab_11/zad1_servlet", true);
+                    req.onreadystatechange = function(){
+                        if (req.readyState == 4){
+                            if (req.status == 200) {
+                                z.value=req.getResponseHeader("value-z");
+                            }
+                            else
+                                alert("status = "+ req.status +"\n"+req.statusText);
+                        }
+                    };
+                    req.setRequestHeader("value-x",  x.value);
+                    req.setRequestHeader("value-y",  y.value);
+                    req.send("null");
+                }
+            }
+            else
+                alert ("error");
+        };
+        function crReq(){
+            //alert( "crReq");
+            var req = null;
+            if (window.XMLHttpRequest)
+            {
+                req = new XMLHttpRequest(); // тут был косяк в примере
+                //alert( "req = XMLHttpRequest");
+            }
+            else if (window.ActiveXObject)
+            {
+                try{
+                    req = new ActiveXObject("Msxml2.XMLHTTP");
+                    //alert( "req = Msxml2.XMLHTTP");
+                }catch(e){
+                    try{
+                        req = new ActiveXObject("Microsoft.XMLHTTP");
+                        //alert( "req = Microsoft.XMLHTTP");
+                    }catch(e){
+                        req = null;
+                        //alert( "req = null");
+                    }
+                }
+            }
+            return req;
+        }
+    </script>
+</head>
+<body>
+
+<b> AJAX Example (Header) </b>
+<form name="FHeader" action="#" method="POST">
+    <input name="x" type="text" value="0" size="5" maxlength="5" />
+    <input name="y" type="text" value="0" size="5" maxlength="5" />
+    <input name="BAdd" value="Add" type="button" size="10" maxlength="10" onclick="OnClick_Header(this.form.x, this.form.y, this.form.z)"/>
+    <input 	name="z" id="z" type="text" value="0" />
+</form>
+</body>
+</html>
