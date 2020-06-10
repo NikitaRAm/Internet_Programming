@@ -1,0 +1,46 @@
+
+<project name="lab13" default = "copy" >
+    <target name="init">
+        <echo message="Build project" />
+        <!-- Определение переменных для сокращения писанины -->
+        <property name = "server" value = "E:\Education\Internet_Programming\Tomcat 9.0"/>
+        <property name = "projectName" value="lab13"/>
+        <property name = "work" value = "E:\Education\Internet_Programming\Labs\Internet_Programming\${projectName}" />
+
+    </target>
+
+    <target name="compile" depends ="init">
+        <!-- Удаление файлов из каталога build -->
+        <delete verbose ="true">
+            <fileset dir="${work}\build"/>
+        </delete>
+        <!-- Компиляция java файлов которые в папке src в папку build -->
+        <javac includeantruntime="false" srcdir="${work}\src\" destdir="${work}\build" classpath="${server}\lib\servlet-api.jar;${server}\lib\jsp-api.jar;${server}\lib\commons-httpclient-3.1.jar"/>
+    </target>
+
+    <target name="create" depends ="compile">
+        <!-- Подготовка директории куда мы скопируем все -->
+        <delete dir="${server}\webapps\${projectName}\" />
+        <mkdir dir="${server}\webapps\${projectName}\" />
+        <mkdir dir="${server}\webapps\${projectName}\WEB-INF" />
+        <mkdir dir="${server}\webapps\${projectName}\WEB-INF\classes" />
+        <mkdir dir="${server}\webapps\${projectName}\pages" />
+        <mkdir dir="${server}\webapps\${projectName}\content" />
+    </target>
+
+    <target name="copy" depends ="create">
+        <!-- Копируем все что необходимо для работы сервера -->
+        <copy file="${work}\web\WEB-INF\web.xml" todir="${server}\webapps\${projectName}\WEB-INF\" />  <!-- Конфигурация сервера -->
+        <!-- <copy todir="${server}\webapps\${projectName}\">
+            <fileset dir="${work}\html"/>
+        </copy>   -->
+        <copy todir="${server}\webapps\${projectName}\WEB-INF\classes">  <!-- Непосредственно то что мы скоипилировали -->
+            <fileset dir="${work}\build"/>
+        </copy>
+        <copy todir="${server}\webapps\${projectName}\">
+            <fileset dir="${work}\web"/>
+        </copy>
+        <!-- <copy file="${work}\web\sample.html" todir="${server}\webapps\${projectName}\"/>
+        <copy file="${work}\web\.jsp" todir="${server}\webapps\${projectName}\"/>  -->
+    </target>
+</project>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="target">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Загрузки/sardine-master/target" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Загрузки/sardine-master/target" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Загрузки/sardine-master/target" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Загрузки/sardine-master/target" recursive="false" type="SOURCES" />
+  </library>
+</component>

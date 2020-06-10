@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    
+    <context-param>
+        <param-name>login</param-name>
+        <param-value>goldwareLexa</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>Lexa%20Goldware[gelia]</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>doc-dir</param-name>
+        <param-value>/media/goldware/087CE1667CE14ECE/Labs/Dev in Internet (java)/Lab 14/files (for zad)</param-value>
+    </context-param>
+    
+    <servlet>
+        <servlet-name>zad1_servlet</servlet-name>
+        <servlet-class>zad1_servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>zad1_servlet</servlet-name>
+        <url-pattern>/zad1_servlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>zad1_servletUpload</servlet-name>
+        <servlet-class>zad1_servletUpload</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>zad1_servletUpload</servlet-name>
+        <url-pattern>/zad1_servletUpload</url-pattern>
+    </servlet-mapping>
+</web-app>
